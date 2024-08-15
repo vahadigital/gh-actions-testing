@@ -1,0 +1,21 @@
+  name: Remote Sync with Manual Trigger
+  on: [workflow_dispatch]
+  
+  jobs:
+    Sync:
+      name: Rsync
+      runs-on: ubuntu-latest
+
+      steps:
+        - name: Checkout
+          uses: actions/checkout@v4.1.7
+        - name: Run Rsync
+          uses: gwllx/remote-sync@v1
+          with:
+            source: rsync-test/
+            target: /rsync-testing/
+            host: ${{ secrets.DEPLOY_HOST }}
+            user: ${{ secrets.DEPLOY_USER }}
+            key: ${{ secrets.DEPLOY_KEY }}
+            args: -rv --delete
+
