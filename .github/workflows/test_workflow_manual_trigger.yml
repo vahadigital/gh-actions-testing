@@ -1,4 +1,4 @@
-  name: Checkout
+  name: Manual trigger
   on: [workflow_dispatch]
   
   
