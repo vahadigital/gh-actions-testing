@@ -3,19 +3,21 @@
   
   jobs:
     Sync:
-      name: Rsync
+      name: Chechout
       runs-on: ubuntu-latest
 
       steps:
         - name: Checkout
           uses: actions/checkout@v4.1.7
-        - name: Run Rsync
-          uses: gwllx/remote-sync@v1
+        - name: rsync
+          uses: burnett01/rsync-deployments@7.0.1
           with:
-            source: rsync-test/
-            target: /rsync-testing/
-            host: ${{ secrets.DEPLOY_HOST }}
-            user: ${{ secrets.DEPLOY_USER }}
-            key: ${{ secrets.DEPLOY_KEY }}
-            args: -rv --delete
+            switches: -avzr --delete
+            legacy_allow_rsa_hostkeys: "true"
+            path: /home/vesa-matti/Projektit/actions-rsync-test/
+            remote_path: /home/vmuser/rsync/
+            remote_host: 10.67.220.191
+            remote_user: vmuser
+            remote_key: ${{ secrets.REMOTE_KEY }}
+            remote_key_pass: ${{ secrets.REMOTE_KEY_PASS }}
 
