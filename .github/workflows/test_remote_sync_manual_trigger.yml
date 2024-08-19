@@ -14,8 +14,8 @@
           with:
             switches: -avzr --delete
             legacy_allow_rsa_hostkeys: "true"
-            path: /home/vesa-matti/Projektit/actions-rsync-test/
-            remote_path: /home/vmuser/rsync/
+            path: /rsync-test-path/
+            remote_path: ~/rsync/
             remote_host: ${{ secrets.REMOTE_HOST }}
             remote_user: ${{ secrets.REMOTE_USER }}
             remote_key: ${{ secrets.REMOTE_KEY }}
