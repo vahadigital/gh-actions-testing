@@ -8,9 +8,7 @@
 
       steps:
         - name: Checkout
-          uses: actions/checkout@v4.1.7
-        - name: Test connection
-          run: ping -c 5 ${{ secrets.REMOTE_HOST }}  
+          uses: actions/checkout@v4.1.7 
         - name: rsync
           uses: burnett01/rsync-deployments@7.0.1
           with:
