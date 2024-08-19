@@ -16,8 +16,7 @@
             legacy_allow_rsa_hostkeys: "true"
             path: /home/vesa-matti/Projektit/actions-rsync-test/
             remote_path: /home/vmuser/rsync/
-            remote_host: 10.67.220.191
-            remote_user: vmuser
+            remote_host: ${{ secrets.REMOTE_HOST }}
+            remote_user: ${{ secrets.REMOTE_USER }}
             remote_key: ${{ secrets.REMOTE_KEY }}
-            remote_key_pass: ${{ secrets.REMOTE_KEY_PASS }}
 
