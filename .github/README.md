@@ -10,13 +10,7 @@ Using locally -> Read more about https://nektosact.com/
 
 ## Contributing
 
-Contributions are welcome! If you would like to contribute to this project, please follow these guidelines:
-
-1. Fork the repository
-2. Create a new branch: `git checkout -b [branch name]`
-3. Make your changes and commit them: `git commit -m 'Add some feature'`
-4. Push to the branch: `git push origin [branch name]`
-5. Submit a pull request
+Contributions are welcome!
 
 ## License
 
@@ -25,4 +19,13 @@ This project is licensed under the MIT License. See the LICENSE.md file for more
 
 ## Contact
 
-For any questions or inquiries, please contact dev@vahadigital.com
+For any questions or inquiries, reach us here in the discussions area.
+
+
+## Sync repository to a remote location
+
+Very simple Rsync process.
+
+
+[.github/workflows/test_remote_sync_manual_trigger.yml](README.md)
+
