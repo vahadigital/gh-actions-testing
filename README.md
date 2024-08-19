@@ -27,5 +27,5 @@ For any questions or inquiries, reach us here in the discussions area.
 Very simple Rsync process.
 
 
-[.github/workflows/test_remote_sync_manual_trigger.yml](README.md)
+[.github/workflows/test_remote_sync_manual_trigger.yml](/.github/workflows/test_remote_sync_manual_trigger.yml)
 
