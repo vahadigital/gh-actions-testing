@@ -39,7 +39,7 @@ For any questions or inquiries, reach us here in the discussions area.
 # Workflows in this repository
 ## Sync repository to a remote location with rsync
 
-Very simple Rsync process.
+Very simple Rsync process. Notice `--delete` flag which removes everything that is not found in the source!
 
 
 [.github/workflows/test_remote_sync_manual_trigger.yml](/.github/workflows/test_remote_sync_manual_trigger.yml)
@@ -48,5 +48,7 @@ Very simple Rsync process.
 ## Sync repository to a remote locations and exclude folders
 
 This is similar workflow than the previous but this excludes the folder "public/var/assets/" from the sync process. Use exclude flag when you don't want overwrite something in the target.
+
+Rsync flags doesn't include `--delete` flag in this workflow.
 
 [.github/workflows/test_remote_sync_and_exclude_manual_trigger.yml](/.github/workflows/test_remote_sync_and_exclude_manual_trigger.yml)
