@@ -1,4 +1,4 @@
-  name: Remote Sync with Manual Trigger
+  name: Remote Sync with Manual Trigger and Exclude Public Var Assets-directory
   on: [workflow_dispatch]
   
   jobs:
@@ -12,7 +12,7 @@
         - name: rsync
           uses: burnett01/rsync-deployments@7.0.1
           with:
-            switches: -avzr --delete --exclude=/public/var/assets/
+            switches: -avr --exclude=/public/var/assets/
             legacy_allow_rsa_hostkeys: "true"
             path: /rsync-test-path/
             remote_path: ~/rsync/
