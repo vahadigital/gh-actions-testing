@@ -1,0 +1,22 @@
+  name: Remote Sync with Manual Trigger
+  on: [workflow_dispatch]
+  
+  jobs:
+    Sync:
+      name: Chechout
+      runs-on: ubuntu-latest
+
+      steps:
+        - name: Checkout
+          uses: actions/checkout@v4.1.7 
+        - name: rsync
+          uses: burnett01/rsync-deployments@7.0.1
+          with:
+            switches: -avzr --delete --exclude=/public/var/assets/
+            legacy_allow_rsa_hostkeys: "true"
+            path: /rsync-test-path/
+            remote_path: ~/rsync/
+            remote_host: ${{ secrets.REMOTE_HOST }}
+            remote_user: ${{ secrets.REMOTE_USER }}
+            remote_key: ${{ secrets.REMOTE_KEY }}
+

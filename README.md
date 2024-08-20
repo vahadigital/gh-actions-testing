@@ -8,6 +8,7 @@
   - [Contact](#contact)
 - [Workflows in this repository](#workflows-in-this-repository)
   - [Sync repository to a remote location with rsync](#sync-repository-to-a-remote-location-with-rsync)
+  - [Sync repository to a remote locations and exclude folders](#sync-repository-to-a-remote-locations-and-exclude-folders)
 
 
 ## Description
@@ -44,3 +45,8 @@ Very simple Rsync process.
 [.github/workflows/test_remote_sync_manual_trigger.yml](/.github/workflows/test_remote_sync_manual_trigger.yml)
 
 
+## Sync repository to a remote locations and exclude folders
+
+This is similar workflow than the previous but this excludes the folder "public/var/assets/" from the sync process. Use exclude flag when you don't want overwrite something in the target.
+
+[.github/workflows/test_remote_sync_and_exclude_manual_trigger.yml](/.github/workflows/test_remote_sync_and_exclude_manual_trigger.yml)
