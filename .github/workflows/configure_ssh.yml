@@ -1,0 +1,58 @@
+name: Configure SSH
+on: [workflow_dispatch]
+
+jobs:
+  SSH_Configuration:
+    runs-on: ubuntu-latest
+
+    env:
+      REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
+      REMOTE_USER: ${{ secrets.REMOTE_USER }}
+      LOCAL_PATH: ${{ secrets.LOCAL_PATH }}
+      REMOTE_PATH: ${{ secrets.REMOTE_PATH }}
+      SSH_KEY: ${{ secrets.REMOTE_KEY }}
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4.1.7
+
+      - name: Configure SSH
+        run: |
+          mkdir -p ~/.ssh/
+          echo "Printing environment variables"
+          #echo $REMOTE_USER
+          #echo $REMOTE_HOST
+          echo $LOCAL_PATH
+          #echo $REMOTE_PATH
+          echo "${{ env.SSH_KEY }}" | tr -d '\r' > ~/.ssh/remote_key
+          echo ""
+          
+          echo "Checking permissions of remote_key before"
+          ls -l ~/.ssh/remote_key
+          echo "Changing permissions of remote_key"
+          chmod 600 ~/.ssh/remote_key
+          echo "Checking permissions of remote_key after the change"
+          ls -l ~/.ssh/remote_key
+          #ssh-keyscan -H "${{ env.REMOTE_HOST }}" >> ~/.ssh/known_hosts
+          cat >>~/.ssh/config <<END
+          Host test_env
+            HostName $REMOTE_HOST
+            User $REMOTE_USER
+            IdentityFile ~/.ssh/remote_key
+            StrictHostKeyChecking no
+          END
+
+          echo "Checking contents of SSH configuration file"
+          echo "---"
+          cat ~/.ssh/config
+          echo "---"
+          echo "SSH configuration completed successfully."
+          ls -la ~/.ssh/
+          #cat ~/.ssh/known_hosts
+
+      - name: Test SSH Connection
+        #if: ${{ !env.ACT }}
+        run: | 
+          echo "Testing SSH Connection"
+          script -c "ssh test_env" ssh.log
+          cat ssh.log

@@ -1,0 +1,36 @@
+  name: Compare two directories with rsync
+  on: [workflow_dispatch] # This workflow is triggered manually or on push
+  
+  
+  jobs:
+    CompareDirectories:
+      name: Compare Directories
+      runs-on: ubuntu-latest
+      environment: test
+
+      steps:
+        #- name: Checkout Repository
+        #  uses: actions/checkout@v4.1.7
+
+        - name: Configure SSH
+          run: |
+            mkdir -p ~/.ssh/
+            echo "$SSH_KEY" > ~/.ssh/test_env.key
+            chmod 600 ~/.ssh/test_env.key
+            cat >>~/.ssh/config <<END
+            Host test_env
+              HostName $SSH_HOST
+              User $SSH_USER
+              IdentityFile ~/.ssh/test_env.key
+              StrictHostKeyChecking no
+            END
+          env:
+            SSH_USER: ${{ secrets.REMOTE_USER }}
+            SSH_KEY: ${{ secrets.REMOTE_KEY }}
+            SSH_HOST: ${{ secrets.REMOTE_HOST }}
+
+
+        - name: Test SSH Connection
+          run: |
+            echo "Testing SSH Connection"
+            #ssh test_env "echo SSH connection successful"

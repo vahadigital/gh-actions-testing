@@ -1,0 +1,55 @@
+name: Compare Directories
+on: [workflow_dispatch]
+
+jobs:
+  CompareDirectories:
+    runs-on: ubuntu-latest
+
+    env:
+      REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
+      REMOTE_USER: ${{ secrets.REMOTE_USER }}
+      LOCAL_PATH: ${{ secrets.LOCAL_PATH }}
+      REMOTE_PATH: ${{ secrets.REMOTE_PATH }}
+      SSH_KEY: ${{ secrets.REMOTE_KEY }}
+
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4.1.7
+
+      - name: Configure SSH
+        run: |
+          mkdir -p ~/.ssh/
+          echo "$SSH_KEY" > ~/.ssh/remote_key
+          chmod 600 ~/.ssh/remote_key
+          ssh-keyscan -H "$REMOTE_HOST" >> ~/.ssh/known_hosts
+          echo "SSH configuration completed successfully."
+          ls -la ~/.ssh/
+          cat ~/.ssh/known_hosts
+
+      - name: Test SSH Connection
+        run: | 
+          echo "Testing SSH Connection"
+          script -c "ssh -o BatchMode=yes -o ConnectTimeout=5 -i ~/.ssh/remote_key $REMOTE_USER@$REMOTE_HOST" ssh.log
+          cat ssh.log
+
+      - name: Compare Files on Remote Server
+        if: ${{ !env.ACT }}
+        id: compare_files
+        run: |
+          rsync -ir --times --dry-run /path/to/local/repo/ ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }}:/path/to/remote/repo/
+          if [ $? -eq 0 ]; then
+            echo "::set-output name=files_match::true"
+          else
+            echo "::set-output name=files_match::false"
+          fi
+
+      - name: Check Comparison Result
+        if: ${{ !env.ACT }}
+        run: |
+          if [ "${{ steps.compare_files.outputs.files_match }}" == "true" ]; then
+            echo "Files match."
+          else
+            echo "Files do not match."
+            exit 1
+          fi
