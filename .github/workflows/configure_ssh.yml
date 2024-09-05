@@ -55,10 +55,10 @@ jobs:
         run: | 
           echo "Testing SSH Connection"
           ssh -v test_env pwd
-          exit
           #script -c "ssh test_env" ssh.log
           #cat ssh.log
           echo "Who am I?"
           whoami
           #echo "Current directory"
           #pwd
+          exit
