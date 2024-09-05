@@ -54,9 +54,11 @@ jobs:
         #if: ${{ !env.ACT }}
         run: | 
           echo "Testing SSH Connection"
-          script -c "ssh test_env" ssh.log
-          cat ssh.log
-          echo "Who am I?"
-          whoami
-          echo "Current directory"
-          pwd
+          ssh -v test_env pwd
+          exit
+          #script -c "ssh test_env" ssh.log
+          #cat ssh.log
+          #echo "Who am I?"
+          #whoami
+          #echo "Current directory"
+          #pwd
