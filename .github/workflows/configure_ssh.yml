@@ -58,7 +58,7 @@ jobs:
           exit
           #script -c "ssh test_env" ssh.log
           #cat ssh.log
-          #echo "Who am I?"
-          #whoami
+          echo "Who am I?"
+          whoami
           #echo "Current directory"
           #pwd
