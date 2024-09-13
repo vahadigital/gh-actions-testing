@@ -56,6 +56,7 @@ jobs:
           echo "Testing SSH Connection"
           ssh -tt test_env << 'EOF'
             pwd
+            ls -la
             cd ..
             ls -la
             cd /var/www/compare/
