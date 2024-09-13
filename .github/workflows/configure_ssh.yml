@@ -59,7 +59,7 @@ jobs:
             ls -la
             cd ..
             ls -la
-            cd /var/www/compare/
+            cd var/www/compare/
             ls -la
             exit
           EOF
