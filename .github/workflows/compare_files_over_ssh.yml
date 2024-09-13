@@ -22,7 +22,7 @@ jobs:
 
       - name: List files in the repository
         run: |
-          ls -la    
+          tree -L 2    
 
       - name: Configure SSH
         run: |
