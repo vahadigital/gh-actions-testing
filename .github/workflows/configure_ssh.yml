@@ -27,7 +27,6 @@ jobs:
           chmod 600 ~/.ssh/remote_key
           echo "Checking permissions of remote_key after the change"
           ls -l ~/.ssh/remote_key
-          #ssh-keyscan -H "${{ env.REMOTE_HOST }}" >> ~/.ssh/known_hosts
           cat >>~/.ssh/config <<END
           Host test_env
             HostName $REMOTE_HOST
