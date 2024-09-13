@@ -19,13 +19,7 @@ jobs:
       - name: Configure SSH
         run: |
           mkdir -p ~/.ssh/
-          echo "Printing environment variables"
-          echo $REMOTE_USER
-          echo $REMOTE_HOST
-          echo $LOCAL_PATH
-          echo $REMOTE_PATH
           echo "${{ env.SSH_KEY }}" | tr -d '\r' > ~/.ssh/remote_key
-          echo ""
           
           echo "Checking permissions of remote_key before"
           ls -l ~/.ssh/remote_key
@@ -48,10 +42,8 @@ jobs:
           echo "---"
           echo "SSH configuration completed successfully."
           ls -la ~/.ssh/
-          #cat ~/.ssh/known_hosts
 
       - name: Test SSH Connection
-        #if: ${{ !env.ACT }}
         run: | 
           echo "Testing SSH Connection"
           ssh -tt test_env << 'EOF'
