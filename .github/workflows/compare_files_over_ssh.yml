@@ -1,4 +1,4 @@
-name: Configure SSH
+name: Compare Files Over SSH
 on: [workflow_dispatch]
 
 jobs:
