@@ -20,6 +20,10 @@ jobs:
             compare
           sparse-checkout-cone-mode: false
 
+      - name: List files in the repository
+        run: |
+          ls -la    
+
       - name: Configure SSH
         run: |
           mkdir -p ~/.ssh/
